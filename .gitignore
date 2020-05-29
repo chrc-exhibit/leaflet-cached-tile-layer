@@ -61,7 +61,7 @@ typings/
 
 # Webstorm
 .idea/
-lib/
+# lib/
 typedoc/
 
 bundle.js

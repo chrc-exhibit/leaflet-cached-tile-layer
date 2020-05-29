@@ -1,9 +1,10 @@
 {
-  "name": "@yaga/leaflet-cached-tile-layer",
+  "name": "leaflet-cached-tile-layer",
   "version": "1.0.0",
-  "description": "A leaflet tile layer cached with @yaga/indexed-db-tile-cache",
+  "description": "A leaflet tile layer cached with IndexedDB",
   "main": "lib/index.js",
   "scripts": {
+    "build": "./node_modules/typescript/bin/tsc",
     "test": "tslint ts/*.ts && tsc && istanbul instrument lib -o test-tmp && browserify test/index.js -o test/bundle.js && karma start karma.conf.js && rm -Rf test-tmp test/bundle.js",
     "travis-test": "tslint ts/*.ts && tsc && istanbul instrument lib -o test-tmp && browserify test/index.js -o test/bundle.js && karma start karma.conf.js --browsers Firefox && rm -Rf test-tmp test/bundle.js",
     "browser-test": "tsc; cp -R lib test-tmp && browserify test/index.js -o browser-test/bundle.js && rm -Rf test-tmp",
@@ -12,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yagajs/leaflet-cached-tile-layer.git"
+    "url": "git+https://github.com/chrc-exhibit/leaflet-cached-tile-layer.git"
   },
   "directories": {
     "lib": "lib",
@@ -32,8 +33,7 @@
   "devDependencies": {
     "@types/chai": "^4.1.2",
     "@types/mocha": "^2.2.48",
-    "bootstrap": "^3.3.7",
-    "browserify": "^14.5.0",
+    "bootstrap": "^3.4.1",
     "chai": "^4.1.2",
     "font-awesome": "^4.7.0",
     "istanbul": "^0.4.5",
@@ -45,8 +45,8 @@
     "karma-safari-launcher": "^1.0.0",
     "mocha": "^3.5.3",
     "tslint": "^5.9.1",
-    "typedoc": "^0.8.0",
-    "typescript": "^2.7.2",
+    "typedoc": "^0.17.7",
+    "typescript": "^2.9.2",
     "uglify-js": "^3.3.12"
   },
   "author": "Arne Schubert <atd.schubert@gmail.com>",

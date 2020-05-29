@@ -1,8 +1,7 @@
-import {
-    IIndexedDbTileCacheSeedProgress as ICachedTileLayerSeedProgress,
-    IndexedDbTileCache,
-} from "@yaga/indexed-db-tile-cache";
+// tslint:disable: max-line-length trailing-comma
+
 import { DomEvent, LatLngBounds, Map, TileLayer, TileLayerOptions, Util } from "leaflet";
+import { IIndexedDbTileCacheSeedProgress as ICachedTileLayerSeedProgress, IndexedDbTileCache } from "./indexed-db-tile-cache";
 
 /**
  * Interface for the tile layer options. It is a mixin of the original Leaflet `TileLayerOptions` and the
@@ -90,11 +89,13 @@ export class CachedTileLayer extends TileLayer {
             x: coords.x,
             y: coords.y,
             z: (this as any)._getZoomForUrl(),
-        }).then((dataUrl: string) => {
-            tile.src = dataUrl;
-        }).catch(() => {
-            tile.src =  this.options.errorTileUrl;
-        });
+        })
+            .then((dataUrl: string) => {
+                tile.src = dataUrl;
+            })
+            .catch(() => {
+                tile.src = this.options.errorTileUrl;
+            });
 
         return tile;
     }
@@ -124,35 +125,30 @@ export class CachedTileLayer extends TileLayer {
      * The default value for `maxZoom` is the current zoom level of the map and the default value for `minZoom` is
      * always `0`.
      */
-    public seedBBox(
-        bbox: LatLngBounds,
-        maxZoom?: number,
-        minZoom: number = 0,
-        cb?: (progress: ICachedTileLayerSeedProgress) => void,
-    ): Promise<number> {
+    public seedBBox(bbox: LatLngBounds, maxZoom?: number, minZoom: number = 0, cb?: (progress: ICachedTileLayerSeedProgress) => void): Promise<number> {
         if (maxZoom === undefined) {
             maxZoom = ((this as any)._map as Map).getZoom();
         }
         const tc: IndexedDbTileCache = this.instantiateIndexedDbTileCache();
         if (cb) {
-            tc.on("seed-progress", cb);
+            tc.addEventListener("seed-progress", cb);
         }
-        return tc.seedBBox({
-            maxLat: bbox.getNorth(),
-            maxLng: bbox.getEast(),
-            minLat: bbox.getSouth(),
-            minLng: bbox.getWest(),
-        }, maxZoom, minZoom);
+        return tc.seedBBox(
+            {
+                maxLat: bbox.getNorth(),
+                maxLng: bbox.getEast(),
+                minLat: bbox.getSouth(),
+                minLng: bbox.getWest(),
+            },
+            maxZoom,
+            minZoom
+        );
     }
 
     /**
      * Seeds like `this.seedBBox`, but uses the current map bounds as bounding box.
      */
-    public seedCurrentView(
-        maxZoom?: number,
-        minZoom: number = 0,
-        cb?: (progress: ICachedTileLayerSeedProgress) => void,
-    ): Promise<number> {
+    public seedCurrentView(maxZoom?: number, minZoom: number = 0, cb?: (progress: ICachedTileLayerSeedProgress) => void): Promise<number> {
         return this.seedBBox(((this as any)._map as Map).getBounds(), maxZoom, minZoom, cb);
     }
 
