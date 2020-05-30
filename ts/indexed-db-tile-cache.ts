@@ -214,23 +214,23 @@ export class IndexedDbTileCache extends Emitter {
         });
     }
 
-    /**
-     * Receives a tile as its base64 encoded data url.
-     */
-    public async getTileAsDataUrl(tileCoordinates: ITileCoordinates): Promise<string> {
-        const blobAsDataUrl = (blob, contentType): Promise<string> => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    resolve("data:" + contentType + ";base64," + reader.result);
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        };
-        const tileEntry: IIndexedDbTileCacheEntry = await this.getTileEntry(tileCoordinates, true);
-        return blobAsDataUrl(tileEntry.data, tileEntry.contentType).then((dataUrl) => Promise.resolve(dataUrl));
-    }
+	/**
+	 * Receives a tile as its base64 encoded data url.
+	 */
+	public async getTileAsDataUrl(tileCoordinates: ITileCoordinates): Promise<string> {
+		const blobAsDataUrl = (blob): Promise<string> => {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onloadend = () => {
+					resolve("" + reader.result);
+				};
+				reader.onerror = reject;
+				reader.readAsDataURL(blob);
+			});
+		};
+		const tileEntry: IIndexedDbTileCacheEntry = await this.getTileEntry(tileCoordinates, true);
+		return blobAsDataUrl(tileEntry.data).then((dataUrl) => Promise.resolve(dataUrl));
+	}
 
     /**
      * Download a specific tile by its coordinates and store it within the indexed-db
