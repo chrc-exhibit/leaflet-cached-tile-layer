@@ -4,6 +4,10 @@
     "tslint:recommended"
   ],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    "trailing-comma": false,
+    "max-line-length": false,
+    "indent": [true, "tabs"]
+  },
   "rulesDirectory": []
 }

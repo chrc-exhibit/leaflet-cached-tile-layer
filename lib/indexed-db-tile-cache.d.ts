@@ -7,7 +7,7 @@ export interface IIndexedDbTileCacheOptions {
     /**
      * Name of the database
      *
-     * The default value is equal to the constance DEFAULT_DATABASE_NAME
+     * The default value is equal to the constant DEFAULT_DATABASE_NAME
      * @default "tile-cache-data"
      */
     databaseName?: string;
@@ -15,42 +15,42 @@ export interface IIndexedDbTileCacheOptions {
      * Version of the IndexedDB store. Should not be changed normally! But can provide an "upgradeneeded" event from
      * IndexedDB.
      *
-     * The default value is equal to the constance DEFAULT_DATABASE_VERSION
+     * The default value is equal to the constant DEFAULT_DATABASE_VERSION
      * @default 1
      */
     databaseVersion?: number;
     /**
      * Name of the object-store. Should correspond with the name of the tile server
      *
-     * The default value is equal to the constance DEFAULT_OBJECT_STORE_NAME
+     * The default value is equal to the constant DEFAULT_OBJECT_STORE_NAME
      * @default "OSM";
      */
     objectStoreName?: string;
     /**
      * URL template of the tile server.
      *
-     * The default value is equal to the constance DEFAULT_TILE_URL
+     * The default value is equal to the constant DEFAULT_TILE_URL
      * @default "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
      */
     tileUrl?: string;
     /**
      * A list of all available sub domains for the URL template.
      *
-     * The default value is equal to the constance DEFAULT_TILE_URL_SUB_DOMAINS
+     * The default value is equal to the constant DEFAULT_TILE_URL_SUB_DOMAINS
      * @default ["a", "b", "c"]
      */
     tileUrlSubDomains?: string[];
     /**
      * The delay in milliseconds used for not stressing the tile server while seeding.
      *
-     * The default value is equal to the constance DEFAULT_CRAWL_DELAY
+     * The default value is equal to the constant DEFAULT_CRAWL_DELAY
      * @default 500
      */
     crawlDelay?: number;
     /**
      * The maximum age in milliseconds of a stored tile.
      *
-     * The default value is equal to the constance DEFAULT_MAX_AGE
+     * The default value is equal to the constant DEFAULT_MAX_AGE
      * @default 1000 * 60 * 60 * 24 * 7
      */
     maxAge?: number;
@@ -59,21 +59,13 @@ export interface IIndexedDbTileCacheOptions {
  * Interface for an internal IndexedDbTileCacheEntry
  */
 export interface IIndexedDbTileCacheEntry {
-    /**
-     * URL of the tile excepts its sub-domain value that is still stored as placeholder.
-     */
+    /** URL of the tile excepts its sub-domain value that is still stored as placeholder. */
     url: string;
-    /**
-     * Timestamp of the creation date of the entry
-     */
+    /** Timestamp of the creation date of the entry */
     timestamp: number;
-    /**
-     * Data stored as blob
-     */
+    /** Data stored as blob */
     data: Blob;
-    /**
-     * The content-type from the response header.
-     */
+    /** The content-type from the response header. */
     contentType: string;
 }
 /**
