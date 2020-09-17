@@ -1,4 +1,4 @@
-import { LatLngBounds, TileLayer, TileLayerOptions } from "leaflet";
+import { LatLngBounds, Map, TileLayer, TileLayerOptions } from "leaflet";
 import { IIndexedDbTileCacheSeedProgress as ICachedTileLayerSeedProgress, IndexedDbTileCache } from "./indexed-db-tile-cache";
 /**
  * Interface for the tile layer options. It is a mixin of the original Leaflet `TileLayerOptions` and the
@@ -50,6 +50,8 @@ export declare class CachedTileLayer extends TileLayer {
      * Options of Leaflets `TileLayer`enhanced with the options for the `IndexedDbTileCache`.
      */
     options: ICachedTileLayerOptions;
+    _map: Map;
+    _globalTileRange: any;
     constructor(urlTemplate: string, options?: ICachedTileLayerOptions);
     /**
      * Rewritten method that serves the tiles from the `IndexedDbTileCache`

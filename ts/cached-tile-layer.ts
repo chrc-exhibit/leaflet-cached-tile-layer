@@ -59,10 +59,10 @@ export class CachedTileLayer extends TileLayer {
 	public options: ICachedTileLayerOptions;
 
 	// tslint:disable-next-line: variable-name
-	protected _map: Map;
+	public _map: Map;
 
 	// tslint:disable-next-line: variable-name
-	protected _globalTileRange: any;
+	public _globalTileRange: any;
 
 	constructor(urlTemplate: string, options?: ICachedTileLayerOptions) {
 		super(urlTemplate, options);
@@ -96,7 +96,7 @@ export class CachedTileLayer extends TileLayer {
 
 		const tc: IndexedDbTileCache = this.instantiateIndexedDbTileCache();
 
-		if (this.options.tms && this._map && !this._map.options.crs.infinite) {
+		if (this.options.tms && this._map && !this._map.options.crs || !this._map.options.crs.infinite) {
 			coords.y = this._globalTileRange.max.y - coords.y;
 		}
 
