@@ -57,6 +57,13 @@ export class CachedTileLayer extends TileLayer {
 	 * Options of Leaflets `TileLayer`enhanced with the options for the `IndexedDbTileCache`.
 	 */
 	public options: ICachedTileLayerOptions;
+
+	// tslint:disable-next-line: variable-name
+	protected _map: Map;
+
+	// tslint:disable-next-line: variable-name
+	protected _globalTileRange: any;
+
 	constructor(urlTemplate: string, options?: ICachedTileLayerOptions) {
 		super(urlTemplate, options);
 	}
@@ -88,6 +95,11 @@ export class CachedTileLayer extends TileLayer {
 		tile.setAttribute("role", "presentation");
 
 		const tc: IndexedDbTileCache = this.instantiateIndexedDbTileCache();
+
+		if (this.options.tms && this._map && !this._map.options.crs.infinite) {
+			coords.y = this._globalTileRange.max.y - coords.y;
+		}
+
 		tc.getTileAsDataUrl({
 			x: coords.x,
 			y: coords.y,
